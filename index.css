@@ -1,0 +1,16 @@
+nav.fixed-bottom a i{
+    margin-right: 4px;
+    font-size: 1.2rem;
+}
+#userImage > img {
+     height: 15vh;
+}
+
+#userCard {
+    background-color: rgb(144, 3, 252);
+}
+.fixed-bottom a {
+    font-size: 0.65rem;
+    text-align: center;
+    padding: 0.1px;
+}
