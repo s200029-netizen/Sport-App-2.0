@@ -1,0 +1,103 @@
+<?php
+session_start();
+// 載入資料庫配置
+        // Load database configuration
+        require_once 'db.php';
+
+        // 啟用錯誤報告 
+        // Enable error reporting
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == "login") {
+        
+
+        // ---------- 以下是使用 mysqli 的範例，展示如何安全地從資料庫中檢索資料 ----------
+        // ---------- Below is an example of using mysqli to safely retrieve data from the database ----------
+        // 1. 建立連結 
+        // 1. Create connection to database
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+        // 檢查連結 
+        // Check connection
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+
+
+        // 2. 準備並執行 SQL 查詢 
+        // 2. Prepare and execute SQL query
+        $sql = "SELECT * FROM users WHERE username = ?;";
+
+
+        // 3. 使用 prepared statement 來防止 SQL 注入 
+        // 3. Use prepared statement to prevent SQL injection
+        $stmt = mysqli_prepare($conn, $sql);
+
+        // 5. 綁定參數並執行 
+        // 5. Bind parameters and execute
+        $usr = $_GET['username'];
+        mysqli_stmt_bind_param($stmt, "s", $usr);
+        // ↑↑↑ 在這裡，"s" 表示 $usr 是一個字符串類型的參數。mysqli_stmt_bind_param 會自動處理 $usr 的轉義，確保它在 SQL 查詢中被安全地使用。
+        // ↑↑↑ Here, "s" indicates that $usr is a string type parameter. mysqli_stmt_bind_param will automatically handle the escaping of $usr to ensure it is safely used in the SQL query.
+
+        // 6. 執行查詢 
+        // 6. Execute the query
+        mysqli_stmt_execute($stmt);
+
+        // 7. 獲取結果 
+        // 7. Get the result
+        $result = mysqli_stmt_get_result($stmt);
+
+        // 每次執行 mysqli_fetch_assoc 都會返回下一行資料，直到沒有資料為止 
+        // Each time you execute mysqli_fetch_assoc, it will return the next row of data until there is no more data
+
+        // Option 1: 只獲取一行資料
+        // Option 1: Fetch only one row of data
+        if ($row = mysqli_fetch_assoc($result)) {
+            if ($_GET['username'] == $row['username'] && $_GET['password'] == $row['password']) {
+                $_SESSION['username'] = $_GET['username'];
+                $_SESSION['id'] = $row['id'];
+                header("Location: result.php");
+            }
+        } else {
+            echo "No results found";
+        }
+    } else if ($_GET['action'] == "logout") {
+        $_SESSION = [];
+        session_destroy();
+        header("Location: login.php");
+        exit;
+    }
+}
+
+
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <h1>Login SportWEB</h1>
+    <form action="login.php" method="GET">
+        <?php if (isset($_SESSION['username']) == false) { ?>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <input type="submit" name="action" value="login">
+        <?php } else { ?>
+            <input type="submit" name="action" value="logout">
+        <?php } ?>
+    </form>
+</body>
+
+</html>

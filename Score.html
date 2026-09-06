@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Score page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"
+        defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="reg.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="row bg-primary text-white mt-3 p-1 rounded text-center">
+        <div class="col">
+            <div>男子乙組鉛球</div>
+            <div>Men's Group B Shot Put</div>
+        </div>
+        <div class="col">
+            <div>Result: 10.93M</div>
+        </div>
+        <div class="col">
+            <div>STD: 8.60M</div>
+        </div>
+        </div>
+         <div class="row bg-primary text-white mt-3 p-1 rounded text-center">
+    <div class="col">
+        <div>男子乙組400米賽跑</div>
+        <div>B grade 400m running</div>
+    </div>
+    <div class="col">
+        <div>Result: 19.00M</div>
+    </div>
+    <div class="col">
+        <div>STD: 20.01M</div>
+    </div>
+</div>
+    </div>
+    <div class="row bg-secondary text-white mt-3 p-1 rounded text-center">
+        <div class="col-5">
+            <i class="bi bi-upload"></i>上載成績 upload result
+        </div>
+        <div class="col-5">
+            進度 progres:9/30
+        </div>
+    </div>
+
+<?php foreach ($data as $row) { ?>
+    <div class="row bg-info mt-3 p-1 rounded mt-5 p-1 rounded text-left">
+        <div class="col">
+            <div>
+                <?= $row['name'] ?>
+            </div>
+            <div>
+                <?= $row['english_name'] ?>
+            </div>
+            <div>Best Result:
+                <?= $row['best_result'] ?>
+            </div>
+        </div>
+        <div class="col test-center">
+            <div class="row">
+                <div>1st</div>
+                <div>400m</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="from-control">
+                </div>
+                <div class="col">
+                    <div>Result</div>
+                    <input type="text" class="from-control">
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="row bg-info mt-3 p-1 rounded mt-5 p-1 rounded text-left">
+                <div class="col">
+                    <div>
+                        <?= $row['name'] ?>
+                    </div>
+                    <div>
+                        <?= $row['english_name'] ?>
+                    </div>
+                    <div>Best Result:
+                        <?= $row['best_result'] ?>
+                    </div>
+                </div>
+                <div class="col test-center">
+                    <div class="row test-center">
+                        <div>2st</div>
+                        <div>400m</div>
+                    </div>
+                    <div class="row test-center">
+                        <div class="col test-center">
+                            <input type="text" class="from-control">
+                        </div>
+                        <div class="col test-center">
+                            <div>Result</div>
+                            <input type="text" class="from-control" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<? } ?>
+
+        <nav class="fixed-bottom border-top d-flex justify-content-around p-2">
+            <a href="reg.html" class="text-decoration-none flex-fill text-black text-center"><i
+                            class="bi bi-person-fill"></i>Registration 報名</a>
+            <a href="Score.html" class="text-decoration-none flex-fill text-black text-center"><i 
+                        class="bi bi-book"></i>Score 成績</a>
+            <a href="#" class="text-decoration-none flex-fill text-black text-center"><i
+                            class="bi bi-card-checklist"></i>Roll Call 點名</a>
+            <a href="#" class="text-decoration-none flex-fill text-black text-center"><i
+                         class="bi bi-clock"></i>Schedule 時間表</a>
+            <a href="#" class="text-decoration-none flex-fill text-black text-center"><i
+                            class="bi bi-clipboard-data"></i>Statistics 統計</a>
+            <a href="#" class="text-decoration-none flex-fill text-black text-center"><i
+                         class="bi bi-award"></i>Rank 排名</a>
+            <a href="login_page.html" class="text-decoration-none flex-fill text-black text-center"><i
+                            class="bi bi-door-open-fill"></i>Log out 登出</a>
+
+
+        </nav>
+</div>
+</body>
+
+</html>
